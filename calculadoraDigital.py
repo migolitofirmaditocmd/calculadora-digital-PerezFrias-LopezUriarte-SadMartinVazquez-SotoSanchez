@@ -12,6 +12,7 @@ Universidad de Guadalajara - Campus GDL
 """
 
 import os
+import csv
 from datetime import datetime
 
 # Variable global para almacenar historial (lista de strings)
@@ -139,7 +140,7 @@ def decimal_a_binario(numero):
     #    - agregar residuo al inicio del string
     #    - numero = numero // 2
     # 3. Retornar el string
-    # Caso especial: si numero == 0, retornar "0"
+    # Caso especial: .gitkeep numero == 0, retornar "0"
     pass
 
 
@@ -277,7 +278,7 @@ def mostrar_historial():
     global historial
 
     # TODO: Implementar
-    # 1. Verificar si historial está vacío
+    # 1. Verificar .gitkeep historial está vacío
     # 2. Si está vacío, mostrar mensaje
     # 3. Si no, iterar sobre historial y mostrar cada operación numerada
 
@@ -286,57 +287,205 @@ def mostrar_historial():
 
 def limpiar_historial():
     """
-    Limpia el historial de operaciones.
+    Limpia completamente el historial de operaciones.
+
+    Vacía la lista global `historial` en memoria y borra el contenido
+    de los archivos `historial.txt` y `datos.csv` dentro de la carpeta `datos`.
+
+    Esto asegura que el historial no reaparezca al reiniciar el programa.
     """
     global historial
-
-    # TODO: Implementar
-    # Vaciar la lista historial
-    pass
+    historial = []
+    ruta_base = os.path.dirname(__file__)
+    carpeta_datos = os.path.join(ruta_base, "datos")
+    ruta_historial = os.path.join(carpeta_datos, "historial.txt")
+    ruta_csv = os.path.join(carpeta_datos, "datos.csv")
+    open(ruta_historial, "w", encoding="utf-8").close()
+    open(ruta_csv, "w", encoding="utf-8").close()
 
 
 # ============================================
 # SECCIÓN 5: GESTIÓN DE ARCHIVOS (Estudiante 1)
 # ============================================
 
+def actualizar_historial(operacion):
+    """
+        Actualiza la variable global `historial` agregando un registro de operación.
+
+        Esta función recibe una lista con los datos de una operación matemática ya
+        calculada, genera la marca de tiempo actual y construye un diccionario con
+        la información necesaria para el historial. Posteriormente, añade dicho
+        diccionario a la lista global `historial`.
+
+        Formato esperado del argumento `operacion`:
+            [
+                resultado,   # valor numérico resultante
+                titulo,      # nombre de la operación (str)
+                expresion,   # representación textual de la operación (str)
+                num1,        # primer operando (numérico)
+                num2         # segundo operando (numérico)
+            ]
+
+        El diccionario agregado al historial contiene:
+            - "titulo": nombre de la operación.
+            - "resultado": resultado numérico.
+            - "operacion": expresión textual.
+            - "num1": primer operando.
+            - "num2": segundo operando.
+            - "fecha": fecha y hora en formato "YYYY-MM-DD HH:MM:SS".
+
+        Efectos secundarios:
+            Modifica la lista global `historial` añadiendo un nuevo registro.
+
+        Requisitos:
+            - La variable global `historial` debe existir y ser una lista.
+            - El módulo `datetime` debe estar importado.
+
+        Args:
+            operacion (list): Lista con los datos de la operación en el orden
+                [resultado, titulo, expresion, num1, num2].
+
+        Returns:
+            None
+        """
+    global historial
+    ahora = datetime.now()
+    datos_a_guardar = {"titulo": operacion[1],
+                       "resultado": operacion[0],
+                       "operacion": operacion[2],
+                       "num1": operacion[3],
+                       "num2": operacion[4],
+                       "fecha": ahora.strftime("%Y-%m-%d %H:%M:%S")}
+    historial.append(datos_a_guardar)
+
 def guardar_historial_archivo():
     """
-    Guarda el historial en el archivo datos/historial.txt
+    Persiste el historial de operaciones en archivos TXT y CSV dentro del proyecto.
+
+    Esta función toma la lista global `historial` y la guarda en dos formatos
+    dentro de la carpeta `datos` ubicada en el directorio del programa:
+
+    1. historial.txt es la versión legible para string
+       Formato: fecha | titulo: operacion = resultado
+
+    2. datos.csv es la versión estructurada para análisis y manipulación de datos
+       Columnas: fecha, titulo, num1, num2, resultado
+
+    Si la carpeta `datos` no existe, se crea automáticamente. Los archivos se
+    sobrescriben completamente con el contenido actual del historial.
+
+    Manejo de errores:
+        - Si ocurre un error al guardar en la carpeta `datos`, la función intenta
+          guardar los archivos en la carpeta base del programa.
+        - Si también falla la ubicación alternativa, se muestra un mensaje de
+          error crítico sin detener el programa.
+
+    Globales:
+        historial (list[dict]): Lista de operaciones registradas durante la sesión.
+
+    Returns:
+        None
+
+    Efectos secundarios:
+        - Crea la carpeta `datos` si no existe.
+        - Sobrescribe los archivos:
+            datos/historial.txt
+            datos/datos.csv
+        - Puede crear archivos alternativos en la carpeta del programa si la
+          carpeta `datos` no es accesible.
+        - Muestra mensajes en consola si ocurre un error de escritura.
     """
     global historial
 
-    # TODO: Implementar
-    # 1. Crear carpeta "datos" si no existe (usar os.makedirs())
-    # 2. Abrir archivo "datos/historial.txt" en modo escritura ("w")
-    # 3. Escribir cada línea del historial al archivo
-    # 4. Cerrar archivo
+    ruta_base = os.path.dirname(__file__)
+    carpeta_datos = os.path.join(ruta_base, "datos")
+    os.makedirs(carpeta_datos, exist_ok=True)
+    ruta_historial = os.path.join(ruta_base, "datos", "historial.txt")
+    ruta_csv = os.path.join(ruta_base, "datos", "datos.csv")
+    try:
+        guardar_archivos(ruta_historial, ruta_csv)
+    except OSError as e:
+        print("No se pudo guardar en carpeta datos:", e)
+        print("Intentando guardar en carpeta del programa...")
+        try:
+            ruta_historial_alt = os.path.join(ruta_base, "historial.txt")
+            ruta_csv_alt = os.path.join(ruta_base, "datos.csv")
 
-    # Ejemplo:
-    # if not os.path.exists("datos"):
-    #     os.makedirs("datos")
-    #
-    # with open("datos/historial.txt", "w") as archivo:
-    #     for linea in historial:
-    #         archivo.write(linea + "\n")
+            guardar_archivos(ruta_historial_alt, ruta_csv_alt)
 
-    pass
+            print("Historial guardado en ubicación alternativa")
 
+        except OSError as e2:
+            print("Error crítico: no se pudo guardar el historial")
+            print(e2)
+
+def guardar_archivos(ruta_historial, ruta_csv):
+    """
+        Guarda el contenido del historial en rutas específicas de TXT y CSV.
+
+        Esta función auxiliar escribe la lista global `historial` en dos archivos:
+        un archivo de texto legible y un archivo CSV estructurado. Se utiliza
+        internamente por `guardar_historial_archivo` para permitir reutilización
+        y manejo de ubicaciones alternativas de guardado.
+
+        Formatos generados:
+            TXT:
+                fecha | titulo: operacion = resultado
+
+            CSV:
+                Columnas: fecha, titulo, num1, num2, resultado
+
+        Globals:
+            historial (list[dict]): Lista de registros de operaciones.
+
+        Args:
+            ruta_historial (str): Ruta completa del archivo TXT destino.
+            ruta_csv (str): Ruta completa del archivo CSV destino.
+
+        Returns:
+            None
+
+        Raises:
+            OSError: Si ocurre un error de escritura o acceso a los archivos.
+
+        Side Effects:
+            - Sobrescribe los archivos indicados.
+            - Persiste en disco el contenido actual del historial.
+        """
+    global historial
+
+    with open(ruta_historial, mode="w", encoding="utf-8") as f:
+        for dato in historial:
+            f.write(f"{dato['fecha']} | {dato['titulo']}: "
+                    f"{dato['operacion']} = {dato['resultado']}\n")
+    with open(ruta_csv, mode="w", encoding="utf-8", newline="") as f:
+        campos = "fecha", "titulo","operacion", "num1", "num2", "resultado"
+        escritor = csv.DictWriter(f, fieldnames=campos)
+        escritor.writeheader()
+        for dato in historial:
+            escritor.writerow(dato)
 
 def cargar_historial_archivo():
     """
-    Carga el historial desde el archivo datos/historial.txt
+    Carga el historial de operaciones desde el archivo CSV.
+
+    Verifica si el archivo `datos.csv` existe dentro de la carpeta `datos`.
+    Si existe, lee cada fila como diccionario y la agrega a la lista global
+    `historial`. Si el archivo no existe, la función no realiza ninguna acción.
+
+    Esto evita errores si el historial aún no ha sido creado.
     """
     global historial
-
-    # TODO: Implementar
-    # 1. Verificar si el archivo existe (os.path.exists())
-    # 2. Si existe:
-    #    - Abrir archivo en modo lectura ("r")
-    #    - Leer todas las líneas
-    #    - Agregar cada línea (sin \n) a la lista historial
-    # 3. Si no existe, no hacer nada
-
-    pass
+    ruta_base = os.path.dirname(__file__)
+    carpeta_datos = os.path.join(ruta_base, "datos")
+    os.makedirs(carpeta_datos, exist_ok=True)
+    ruta_csv = os.path.join(ruta_base, "datos", "datos.csv")
+    if not os.path.exists(ruta_csv):
+        return
+    with open(ruta_csv,mode="r",encoding="utf-8") as f:
+        lector = csv.DictReader(f)
+        for fila in lector:
+            historial.append(fila)
 
 
 # ============================================

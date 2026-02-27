@@ -1,8 +1,27 @@
+# Entorno virtual
 venv/
+
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env
+*.py[cod]
+*.so
+.Python
+
+# Temporales
+*.bak
+*.txt.bak
+*~
+
+# Sistema
 .DS_Store
-.ipynb_checkpoints
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Datos generados
+datos/*.txt
+!datos/historial_ejemplo.txt
