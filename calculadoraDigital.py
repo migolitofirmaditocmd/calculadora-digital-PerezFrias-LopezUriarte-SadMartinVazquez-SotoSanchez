@@ -22,7 +22,111 @@ historial = []
 # SECCIÓN 1: FUNCIONES MATEMÁTICAS (Estudiante 2)
 # ============================================
 
+def sumar(a, b):
+    """
+    Suma dos números.
 
+    Args:
+        a (float): Primer número
+        b (float): Segundo número
+
+    Returns: 
+       list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
+    """
+    return [a + b, "suma"]
+
+
+def restar(a, b):
+    """
+    Resta dos números.
+
+    Args:
+        a (float): Primer número
+        b (float): Segundo número
+
+    Returns: 
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
+    """
+    return [a - b, "resta"]
+
+
+
+def multiplicar(a, b):
+    """
+    Multiplica dos números.
+
+    Args:
+        a (float): Primer número
+        b (float): Segundo número
+
+    Returns:
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
+    """
+    return [a * b, "multiplicacion"]
+    
+
+
+def dividir(a, b):
+    """
+    Divide dos números.
+
+    Args:
+        a (float): Dividendo
+        b (float): Divisor
+
+    Returns:
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
+
+    Raises:
+        None: Retorna None en lugar de lanzar excepción
+    """
+    while True:
+        if b == 0 or a == 0:
+            return "Error: No se puede dividir entre cero"
+        elif b != 0 and a != 0:
+            return [a / b, "division"]    
+
+    
+    
+    
+    
+
+
+def modulo(a, b):
+    """
+    Calcula el módulo (residuo) de dos números.
+
+    Args:
+        a (float): Dividendo
+        b (float): Divisor
+
+    Returns:
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
+    """
+    if b == 0:
+        return "Error: No se puede calcular modulo con cero"
+    return [a % b, "modulo"]
+    
+
+
+def potencia(a, b):
+    """
+    Calcula a elevado a la potencia b.
+
+    Args:
+        a (float): Base
+        b (float): Exponente
+
+    Returns:
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
+    """
+    return [a ** b, "potencia"]
 
 
 # ============================================
