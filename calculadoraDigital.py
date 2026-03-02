@@ -194,7 +194,7 @@ def hexadecimal_a_decimal(hexadecimal):
 
 
 # ============================================
-# SECCIÓN 3: CONVERSIÓN DE UNIDADES (Estudiante 3)
+# SECCIÓN 3: CONVERSIÓN DE UNIDADES (COMPLETADO)
 # ============================================
 
 def bytes_a_kilobytes(bytes_val):
@@ -210,7 +210,7 @@ def bytes_a_kilobytes(bytes_val):
     return bytes_val / 1024
 
 
-def kilobytes_a_megabytes(kb):
+def kilobytes_a_megabytes(kilobytes):
     """
     Convierte kilobytes a megabytes.
 
@@ -221,10 +221,10 @@ def kilobytes_a_megabytes(kb):
         float: Cantidad en megabytes
     """
     # TODO: Implementar (1 MB = 1024 KB)
-    pass
+    return kb / 1024
 
 
-def megabytes_a_gigabytes(mb):
+def megabytes_a_gigabytes(megabytes):
     """
     Convierte megabytes a gigabytes.
 
@@ -235,7 +235,43 @@ def megabytes_a_gigabytes(mb):
         float: Cantidad en gigabytes
     """
     # TODO: Implementar
-    pass
+    return mb / 1024
+
+def gigabytes_a_megabytes(gigabytes):
+    """
+    Convierte gigabytes a megabytes.
+
+    Args:
+        gb (float): Cantidad en gigabytes
+
+    Returns:
+        float: Cantidad en megabytes
+    """
+    return gb * 1024
+
+def megabytes_a_kilobytes(megabytes):
+    """
+    Convierte megabytes a kilobytes.
+
+    Args:
+        mb (float): Cantidad en megabytes
+
+    Returns:
+        float: Cantidad en kilobytes
+    """
+    return mb * 1024
+
+def kilobytes_a_bytes(kilobytes):
+    """
+    Convierte kilobytes a bytes.
+
+    Args:
+        kb (float): Cantidad en kilobytes
+
+    Returns:
+        float: Cantidad en bytes
+    """
+    return kb * 1024
 
 
 # TODO: Implementar las funciones inversas
@@ -305,7 +341,7 @@ def limpiar_historial():
 
 
 # ============================================
-# SECCIÓN 5: GESTIÓN DE ARCHIVOS (Estudiante 1)
+# SECCIÓN 5: GESTIÓN DE ARCHIVOS (COMPLETADO)
 # ============================================
 
 def actualizar_historial(operacion):
