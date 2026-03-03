@@ -277,48 +277,178 @@ def kilobytes_a_bytes(kilobytes):
 # TODO: Implementar las funciones inversas
 # gigabytes_a_megabytes(), megabytes_a_kilobytes(), kilobytes_a_bytes()
 
+# ============================================
+# SECCIÓN 4: CALCULADORA CIENTIFICA
+# ============================================
+
+def factorial(numero):
+    """
+    Calcula el factorial de un número entero no negativo.
+
+    Parámetros:
+        numero (int): Número entero del cual se desea calcular el factorial.
+
+    Retorna:
+        int: Resultado del factorial de 'numero'.
+
+    Nota:
+        El factorial de 0 es 1 por definición matemática.
+    """
+    resultado = 1
+    for i in range(1,numero+1):
+        resultado *= i
+    return resultado
+
+def grados_a_radianes(grados):
+    """
+    Convierte un ángulo en grados a radianes.
+
+    Parámetros:
+        grados (float): Ángulo expresado en grados.
+
+    Retorna:
+        float: Ángulo convertido a radianes.
+    """
+    pi = 3.14159
+    return grados*(pi/180)
+
+def calcular_seno_aproximado(grad,precision=10):
+    """
+    Calcula una aproximación del seno usando la serie de Taylor.
+
+    Parámetros:
+        grad (float): Ángulo en grados.
+        precision (int, opcional): Número de términos de la serie de Taylor.
+                                    Mayor valor implica mayor precisión.
+                                    Por defecto es 10.
+
+    Retorna:
+        float: Aproximación del seno del ángulo dado.
+    """
+    x_radianes = grados_a_radianes(grad)
+    seno_aproximado = 0
+    for n in range(precision):
+        potencia = 2 * n + 1
+        termino = ((-1) ** n) * (x_radianes ** potencia) / factorial(potencia)
+        seno_aproximado += termino
+
+    return seno_aproximado
+
+def calcular_coseno_aproximado(grad,precision=10):
+    """
+    Calcula una aproximación del coseno usando la serie de Taylor.
+
+    Parámetros:
+        grad (float): Ángulo en grados.
+        precision (int, opcional): Número de términos de la serie de Taylor.
+                                    Mayor valor implica mayor precisión.
+                                    Por defecto es 10.
+
+    Retorna:
+        float: Aproximación del coseno del ángulo dado.
+    """
+    
+    x_radianes = grados_a_radianes(grad)
+    coseno_aproximado = 0
+    for n in range(precision):
+        potencia = 2 * n
+        termino = ((-1) ** n) * (x_radianes ** potencia) / factorial(potencia)
+        coseno_aproximado += termino
+
+    return coseno_aproximado
+
+def calcular_tangente_aproximada(grad):
+    """
+    Calcula una aproximación de la tangente como el cociente
+    entre seno y coseno aproximados.
+
+    Parámetros:
+        grad (float): Ángulo en grados.
+
+    Retorna:
+        float | str: Valor aproximado de la tangente.
+                     Retorna "Indefinida" si el coseno es cercano a 0.
+    """
+    coseno = calcular_coseno_aproximado(grad)
+    if abs(coseno) < 1e-10:
+        return "Indefinida"
+    return calcular_seno_aproximado(grad)/coseno
+
+def calculadora_cientifica():
+    """
+    Ejecuta un menú interactivo de calculadora científica básica.
+
+    Permite al usuario calcular:
+        - Seno
+        - Coseno
+        - Tangente
+
+    El usuario puede salir escribiendo 'N'.
+
+    La calculadora utiliza aproximaciones mediante
+    series de Taylor para los cálculos trigonométricos.
+    """
+    booleano = True
+    while booleano:
+        usuario = str(input("¿Que es lo que quiere calcular(seno/coseno/tangente/N para salir)?: ").lower())
+        if usuario == "seno":
+            grados_usuario = float(input("Ingrese los grados a evaluar: "))
+            print(f"Resultado: {calcular_seno_aproximado(grad=grados_usuario)}")
+        elif usuario == "coseno":
+            grados_usuario = float(input("Ingrese los grados a evaluar: "))
+            print(f"Resultado: {calcular_coseno_aproximado(grad=grados_usuario)}")
+        elif usuario == "tangente":
+            grados_usuario = float(input("Ingrese los grados a evaluar: "))
+            print(f"Resultado: {calcular_tangente_aproximada(grad=grados_usuario)}")
+        elif usuario == "n":
+            print("Saliendo...")
+            booleano = False
+        else:
+            print("Error.Input invalido")
 
 # ============================================
-# SECCIÓN 4: GESTIÓN DE HISTORIAL (Estudiante 3)
+# SECCIÓN 5: GESTIÓN DE HISTORIAL (Estudiante 3)
 # ============================================
-
-def agregar_al_historial(operacion, num1, num2, resultado):
-    """
-    Agrega una operación al historial.
-
-    Args:
-        operacion (str): Tipo de operación (ej: "Suma", "División")
-        num1 (float): Primer número
-        num2 (float): Segundo número
-        resultado (float): Resultado de la operación
-    """
-    global historial
-
-    # TODO: Implementar
-    # 1. Crear string con formato: "operación: num1 op num2 = resultado"
-    # 2. Agregar al final de la lista historial
-    # 3. Si historial tiene más de 10 elementos, eliminar el primero
-
-    # Ejemplo de formato:
-    # fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    # entrada = f"{fecha_hora} | {operacion}: {num1} + {num2} = {resultado}"
-    # historial.append(entrada)
-
-    pass
-
 
 def mostrar_historial():
     """
-    Muestra el historial de operaciones.
+    Muestra el historial de operaciones almacenado en el archivo historial.txt.
+
+    La función realiza los siguientes pasos:
+        1. Construye la ruta absoluta hacia la carpeta "datos".
+        2. Verifica si el archivo "historial.txt" existe.
+        3. Si el archivo existe:
+            - Lee todas las líneas del archivo.
+            - Si el archivo contiene datos, muestra cada operación numerada.
+            - Si el archivo está vacío, muestra un mensaje indicando que no hay registros.
+        4. Si el archivo no existe, muestra un mensaje indicando que los datos no están disponibles.
+
+    Retorna:
+        None
+
+    Nota:
+        El archivo debe encontrarse dentro de la carpeta "datos"
+        ubicada en el mismo directorio que el script.
     """
-    global historial
+    ruta_base = os.path.dirname(__file__)
+    carpeta_datos = os.path.join(ruta_base, "datos")
+    ruta_historial = os.path.join(carpeta_datos, "historial.txt")
+    if os.path.exists(ruta_historial):
+        with open(ruta_historial,mode="r",encoding="UTF-8") as f:
+            lista_de_historial = f.readlines()
+            if lista_de_historial:
+                print("Historial: ")
+                for indice,linea in enumerate(lista_de_historial,start=1):
+                    print(f"{indice}:{linea.strip()}")
+            elif not lista_de_historial:
+                print("Historial vacio")
+    else:          
+        print("Datos no disponibles")
 
     # TODO: Implementar
     # 1. Verificar .gitkeep historial está vacío
     # 2. Si está vacío, mostrar mensaje
     # 3. Si no, iterar sobre historial y mostrar cada operación numerada
-
-    pass
 
 
 def limpiar_historial():
@@ -341,7 +471,7 @@ def limpiar_historial():
 
 
 # ============================================
-# SECCIÓN 5: GESTIÓN DE ARCHIVOS (COMPLETADO)
+# SECCIÓN 6: GESTIÓN DE ARCHIVOS (COMPLETADO)
 # ============================================
 
 def actualizar_historial(operacion):
@@ -525,7 +655,7 @@ def cargar_historial_archivo():
 
 
 # ============================================
-# SECCIÓN 6: VALIDACIÓN (Estudiante 1)
+# SECCIÓN 7: VALIDACIÓN (Estudiante 1)
 # ============================================
 
 def validar_numero(mensaje):
@@ -562,7 +692,7 @@ def validar_numero_entero(mensaje):
 
 
 # ============================================
-# SECCIÓN 7: MENÚS (Estudiante 1)
+# SECCIÓN 8: MENÚS (Estudiante 1)
 # ============================================
 
 def mostrar_menu_principal():
