@@ -469,7 +469,7 @@ def guardar_archivos(ruta_historial, ruta_csv):
                 fecha | titulo: operacion = resultado
 
             CSV:
-                Columnas: fecha, titulo, num1, num2, resultado
+                Columnas: fecha, titulo, operacion, num1, num2, resultado
 
         Globals:
             historial (list[dict]): Lista de registros de operaciones.
