@@ -125,13 +125,27 @@ def potencia(a, b):
 def decimal_a_binario(numero):
     """
     Convierte un número decimal a binario usando algoritmo manual.
-
-    Args:
-        numero (int): Número decimal
+    Lógica del Algoritmo:
+    1. Se maneja el caso base: si el número es 0, el resultado es "0".
+    2. Mientras el número sea mayor a 0:
+       - Se obtiene el residuo de la división entre 2 (numero % 2).
+       - El residuo se concatena al INICIO de la cadena de texto resultante.
+       - Se actualiza el número dividiéndolo por 2 usando división entera (//).
+       Args:
+        numero (int): El número entero decimal a convertir.
 
     Returns:
-        str: Representación binaria como string
+        str: Representación binaria resultante.
     """
+    if numero == 0:
+        return "0"
+    
+    resultado = ""
+    while numero > 0:
+        residuo = numero % 2
+        resultado = str(residuo) + resultado
+        numero = numero // 2
+    return resultado
     # TODO: Implementar algoritmo de división sucesiva
     # Algoritmo:
     # 1. Crear string vacío para resultado
@@ -140,20 +154,39 @@ def decimal_a_binario(numero):
     #    - agregar residuo al inicio del string
     #    - numero = numero // 2
     # 3. Retornar el string
-    # Caso especial: .gitkeep numero == 0, retornar "0"
+    # Caso especial: si numero == 0, retornar "0"
     pass
 
 
 def decimal_a_hexadecimal(numero):
     """
-    Convierte un número decimal a hexadecimal.
+    Convierte un número decimal a hexadecimal usando residuos y mapeo de caracteres.
+
+    Lógica del Algoritmo:
+    1. Se define una cadena de referencia "0123456789ABCDEF" donde cada índice 
+       corresponde a su valor hexadecimal.
+    2. Se divide el número sucesivamente entre 16.
+    3. El residuo de cada división se usa como índice para extraer el carácter 
+       correcto de la cadena de referencia.
+    4. El proceso termina cuando el cociente llega a 0.
 
     Args:
-        numero (int): Número decimal
+        numero (int): Número decimal entero.
 
     Returns:
-        str: Representación hexadecimal como string
+        str: Representación hexadecimal (ej. 255 -> "FF").
     """
+    if numero == 0:
+        return "0"
+    
+    digitos_hex = "0123456789ABCDEF"
+    resultado = ""
+    while numero > 0:
+        residuo = numero % 16
+        resultado = digitos_hex[residuo] + resultado
+        numero = numero // 16
+    return resultado
+        
     # TODO: Implementar
     # Pueden usar el método similar a binario
     # Recordar: 10=A, 11=B, 12=C, 13=D, 14=E, 15=F
@@ -162,14 +195,31 @@ def decimal_a_hexadecimal(numero):
 
 def binario_a_decimal(binario):
     """
-    Convierte un número binario (string) a decimal.
+    Convierte un número binario (string) a su equivalente decimal.
+
+    Lógica del Algoritmo:
+    1. Se inicializa un acumulador 'decimal' en 0.
+    2. Se recorre el string de derecha a izquierda (potencias crecientes).
+    3. Para cada dígito en la posición 'i':
+       - Se multiplica el dígito (0 o 1) por la base 2 elevada a la potencia 'i'.
+       - Se suma el resultado al acumulador decimal.
+    
+    Fórmula: decimal = sum(digito * 2^posicion)
 
     Args:
-        binario (str): Número binario como string
+        binario (str): Cadena de texto con ceros y unos.
 
     Returns:
-        int: Número decimal
+        int: El valor entero en base 10.
     """
+    decimal = 0
+    # Invertimos el string para que el índice coincida con la potencia
+    binario_inv = binario[::-1]
+    
+    for i in range(len(binario_inv)):
+        digito = int(binario_inv[i])
+        decimal += digito * (2 ** i)
+    return decimal
     # TODO: Implementar
     # Algoritmo:
     # 1. Inicializar decimal = 0
@@ -180,19 +230,48 @@ def binario_a_decimal(binario):
 
 
 def hexadecimal_a_decimal(hexadecimal):
-    """
+  """
     Convierte un número hexadecimal (string) a decimal.
 
+    Lógica del Algoritmo:
+    1. Se normaliza la entrada a mayúsculas con .upper() para evitar errores de caja.
+    2. Se define la cadena de referencia "0123456789ABCDEF".
+    3. Se invierte la cadena para que el índice del bucle coincida con la potencia de 16.
+    4. Para cada carácter, se busca su posición en la cadena de referencia:
+       - Si el carácter no es válido (ej. 'G'), se lanza una excepción clara.
+       - Se suma al total: valor * (16 ** posición).
+
     Args:
-        hexadecimal (str): Número hexadecimal como string
+        hexadecimal (str): Cadena hexadecimal (ej. "1A", "F3").
 
     Returns:
-        int: Número decimal
+        int: El valor entero decimal equivalente.
+
+    Raises:
+        ValueError: Si la cadena contiene caracteres no hexadecimales.
     """
-    # TODO: Implementar
-    pass
-
-
+    # 1. Normalización y preparación
+hexadecimal = str(hexadecimal).upper().strip()
+digitos_hex = "0123456789ABCDEF"
+decimal = 0
+    
+    # 2. Invertir para manejar potencias (16^0, 16^1, etc.)
+hex_inv = hexadecimal[::-1]
+    
+    # 3. Iteración y cálculo
+for i in range(len(hex_inv)):
+        caracter = hex_inv[i]
+        
+        # Validación: ¿El carácter existe en nuestro alfabeto hexadecimal?
+        if caracter not in digitos_hex:
+            raise ValueError(f"Carácter inválido '{caracter}' detectado en el número hexadecimal.")
+            
+        valor = digitos_hex.index(caracter)
+        decimal += valor * (16 ** i)
+        
+return decimal
+# TODO: Implementar
+pass
 # ============================================
 # SECCIÓN 3: CONVERSIÓN DE UNIDADES (COMPLETADO)
 # ============================================
