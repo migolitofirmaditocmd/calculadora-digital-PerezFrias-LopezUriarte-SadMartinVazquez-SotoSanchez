@@ -30,10 +30,11 @@ def sumar(a, b):
         a (float): Primer número
         b (float): Segundo número
 
-    Returns:
-        float: Resultado de la suma
+    Returns: 
+       list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
     """
-    return a + b
+    return [a + b, "suma"]
 
 
 def restar(a, b):
@@ -44,11 +45,12 @@ def restar(a, b):
         a (float): Primer número
         b (float): Segundo número
 
-    Returns:
-        float: Resultado de la resta
+    Returns: 
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
     """
-    # TODO: Implementar
-    pass
+    return [a - b, "resta"]
+
 
 
 def multiplicar(a, b):
@@ -60,10 +62,11 @@ def multiplicar(a, b):
         b (float): Segundo número
 
     Returns:
-        float: Resultado de la multiplicación
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
     """
-    # TODO: Implementar
-    pass
+    return [a * b, "multiplicacion"]
+    
 
 
 def dividir(a, b):
@@ -75,17 +78,22 @@ def dividir(a, b):
         b (float): Divisor
 
     Returns:
-        float: Resultado de la división
-        None: Si b es cero
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
 
     Raises:
         None: Retorna None en lugar de lanzar excepción
     """
-    # TODO: Implementar
-    # Verificar que b no sea cero
-    # Si b == 0, retornar None
-    # Si no, retornar a / b
-    pass
+    while True:
+        if b == 0 or a == 0:
+            return "Error: No se puede dividir entre cero"
+        elif b != 0 and a != 0:
+            return [a / b, "division"]    
+
+    
+    
+    
+    
 
 
 def modulo(a, b):
@@ -97,10 +105,13 @@ def modulo(a, b):
         b (float): Divisor
 
     Returns:
-        float: Residuo de la división
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
     """
-    # TODO: Implementar
-    pass
+    if b == 0:
+        return "Error: No se puede calcular modulo con cero"
+    return [a % b, "modulo"]
+    
 
 
 def potencia(a, b):
@@ -112,10 +123,10 @@ def potencia(a, b):
         b (float): Exponente
 
     Returns:
-        float: Resultado de a^b
+        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
+                          el resultado en formato [resultado,operación].
     """
-    # TODO: Implementar
-    pass
+    return [a ** b, "potencia"]
 
 
 # ============================================
