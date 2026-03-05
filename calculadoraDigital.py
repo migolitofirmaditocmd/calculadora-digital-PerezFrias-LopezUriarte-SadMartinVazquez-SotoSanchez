@@ -786,10 +786,20 @@ def validar_numero_entero(mensaje):
 # ============================================
 
 def mostrar_menu_principal():
-    """Muestra el menú principal"""
-    print("\n" + "="*60)
+    """
+    Muestra en pantalla el menú principal del programa.
+
+    Función:
+    - Presenta al usuario las opciones disponibles de la calculadora.
+    - No solicita datos ni toma decisiones.
+    - Su única responsabilidad es mostrar información.
+
+    No recibe parámetros.
+    No retorna ningún valor.
+    """
+    print("\n" + "=" * 60)
     print("   CALCULADORA MULTIFUNCIONAL v2.0")
-    print("="*60)
+    print("=" * 60)
     print("\nMENÚ PRINCIPAL:")
     print("1. Calculadora Básica")
     print("2. Conversor de Unidades de Datos")
@@ -797,50 +807,150 @@ def mostrar_menu_principal():
     print("4. Ver Historial")
     print("5. Limpiar Historial")
     print("6. Salir")
-    print("-"*60)
+    print("-" * 60)
 
 
 def menu_calculadora_basica():
-    """Menú y lógica de la calculadora básica"""
-    print("\n--- CALCULADORA BÁSICA ---")
-    print("1. Suma")
-    print("2. Resta")
-    print("3. Multiplicación")
-    print("4. División")
-    print("5. Módulo (residuo)")
-    print("6. Potencia")
-    print("7. Volver al menú principal")
+    """
+    Controla el menú de la calculadora básica.
 
-    opcion = input("\nSeleccione operación: ")
+    Función:
+    - Muestra las operaciones matemáticas disponibles.
+    - Permite al usuario seleccionar una operación.
+    - Mantiene el menú activo mediante un bucle while True.
+    - Sale del menú cuando el usuario selecciona la opción 7.
 
-    if opcion == "7":
-        return
+    No recibe parámetros.
+    No retorna ningún valor.
+    """
+    while True:
+        print("\n--- CALCULADORA BÁSICA ---")
+        print("1. Suma")
+        print("2. Resta")
+        print("3. Multiplicación")
+        print("4. División")
+        print("5. Módulo (residuo)")
+        print("6. Potencia")
+        print("7. Volver al menú principal")
 
-    # Solicitar números
-    num1 = validar_numero("Ingrese el primer número: ")
-    num2 = validar_numero("Ingrese el segundo número: ")
+        opcion = input("\nSeleccione operación: ")
 
-    # TODO: Implementar lógica según opción
-    # - Si opcion == "1": resultado = sumar(num1, num2)
-    # - Si opcion == "2": resultado = restar(num1, num2)
-    # - etc.
-    # - Mostrar resultado
-    # - Llamar a agregar_al_historial()
+        if opcion == "7":
+            break
 
-    pass
+        print("⚠️ Operación aún no implementada")
 
 
 def menu_conversor_unidades():
-    """Menú y lógica del conversor de unidades"""
-    # TODO: Implementar
-    pass
+    """
+    Controla el menú del conversor de unidades de datos.
+
+    Función:
+    - Muestra las opciones de conversión disponibles.
+    - Permite al usuario elegir una conversión.
+    - Usa un bucle while True para repetir el menú.
+    - Regresa al menú principal cuando el usuario elige la opción 3.
+
+    No recibe parámetros.
+    No retorna ningún valor.
+    """
+    while True:
+        print("\n--- CONVERSOR DE UNIDADES ---")
+        print("1. Convertir KB a MB")
+        print("2. Convertir MB a GB")
+        print("3. Volver al menú principal")
+
+        opcion = input("\nSeleccione opción: ")
+
+        if opcion == "3":
+            break
+
+        print("⚠️ Conversión aún no implementada")
 
 
 def menu_sistemas_numericos():
-    """Menú y lógica de conversión de sistemas numéricos"""
-    # TODO: Implementar
-    pass
+    """
+    Controla el menú de conversión de sistemas numéricos.
 
+    Función:
+    - Permite seleccionar conversiones entre sistemas numéricos.
+    - Mantiene el menú activo usando un bucle while True.
+    - Sale del menú cuando el usuario selecciona la opción 3.
+
+    No recibe parámetros.
+    No retorna ningún valor.
+    """
+    while True:
+        print("\n--- SISTEMAS NUMÉRICOS ---")
+        print("1. Decimal a Binario")
+        print("2. Binario a Decimal")
+        print("3. Volver al menú principal")
+
+        opcion = input("\nSeleccione opción: ")
+
+        if opcion == "3":
+            break
+
+        print("⚠️ Conversión aún no implementada")
+
+
+def main():
+    """
+    Función principal del programa.
+
+    Función:
+    - Controla el flujo general de la aplicación.
+    - Muestra el menú principal de forma repetida.
+    - Permite al usuario navegar entre los distintos submenús.
+    - Finaliza el programa cuando el usuario selecciona la opción "Salir".
+
+    Estructura clave:
+    - Usa un bucle while True para mantener el programa en ejecución.
+    - Utiliza input() para capturar la opción del usuario.
+    - Emplea break para terminar el programa de forma controlada.
+
+    No recibe parámetros.
+    No retorna ningún valor.
+    """
+    while True:
+        mostrar_menu_principal()
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            menu_calculadora_basica()
+        elif opcion == "2":
+            menu_conversor_unidades()
+        elif opcion == "3":
+            menu_sistemas_numericos()
+        elif opcion == "4":
+            print("⚠️ Historial aún no implementado")
+        elif opcion == "5":
+            print("⚠️ Limpieza de historial aún no implementada")
+        elif opcion == "6":
+            print("\nGracias por usar la calculadora 👋")
+            break
+        else:
+            print("❌ Opción no válida, intente de nuevo")
+
+
+def iniciar_programa():
+    """
+    Punto de entrada del programa.
+
+    Función:
+    - Inicia la ejecución de la aplicación.
+    - Llama a la función main(), que controla todo el flujo.
+
+    Esta función existe para dejar explícito
+    dónde comienza la ejecución del programa.
+
+    No recibe parámetros.
+    No retorna ningún valor.
+    """
+    main()
+
+
+iniciar_programa()
 
 # ============================================
 # PROGRAMA PRINCIPAL
