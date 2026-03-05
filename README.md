@@ -13,6 +13,8 @@ Menú principal interactivo
 Calculadora básica con funciones
 Conversor de unidades de datos
 Calculadora de sistemas numéricos
+Calculadora trigonometrica
+Conversor de temperaturas
 Historial de operaciones
 Persistencia de datos (archivos)
 Validación de entrada

@@ -27,14 +27,21 @@ def sumar(a, b):
     Suma dos números.
 
     Args:
-        a (float): Primer número
-        b (float): Segundo número
+        a (float): Primer número.
+        b (float): Segundo número.
 
-    Returns: 
-       list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
-                          el resultado en formato [resultado,operación].
+    Returns:
+        list: Lista con la información de la operación en el formato:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (float)
+            ]
     """
-    return [a + b, "suma"]
+    resultado = a + b
+    return [resultado, "suma", f"{a} + {b}", a, b]
 
 
 def restar(a, b):
@@ -42,15 +49,21 @@ def restar(a, b):
     Resta dos números.
 
     Args:
-        a (float): Primer número
-        b (float): Segundo número
+        a (float): Primer número.
+        b (float): Segundo número.
 
-    Returns: 
-        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
-                          el resultado en formato [resultado,operación].
+    Returns:
+        list: Lista con la información de la operación en el formato:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (float)
+            ]
     """
-    return [a - b, "resta"]
-
+    resultado = a - b
+    return [resultado, "resta", f"{a} - {b}", a, b]
 
 
 def multiplicar(a, b):
@@ -58,15 +71,21 @@ def multiplicar(a, b):
     Multiplica dos números.
 
     Args:
-        a (float): Primer número
-        b (float): Segundo número
+        a (float): Primer número.
+        b (float): Segundo número.
 
     Returns:
-        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
-                          el resultado en formato [resultado,operación].
+        list: Lista con la información de la operación en el formato:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (float)
+            ]
     """
-    return [a * b, "multiplicacion"]
-    
+    resultado = a * b
+    return [resultado, "multiplicacion", f"{a} * {b}", a, b]
 
 
 def dividir(a, b):
@@ -74,26 +93,26 @@ def dividir(a, b):
     Divide dos números.
 
     Args:
-        a (float): Dividendo
-        b (float): Divisor
+        a (float): Dividendo.
+        b (float): Divisor.
 
     Returns:
-        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
-                          el resultado en formato [resultado,operación].
-
-    Raises:
-        None: Retorna None en lugar de lanzar excepción
+        list | str:
+            - Lista con la información de la operación si es válida:
+                [
+                    resultado (float),
+                    titulo (str),
+                    operacion (str),
+                    num1 (float),
+                    num2 (float)
+                ]
+            - Mensaje de error si se intenta dividir entre cero.
     """
-    while True:
-        if b == 0 or a == 0:
-            return "Error: No se puede dividir entre cero"
-        elif b != 0 and a != 0:
-            return [a / b, "division"]    
+    if b == 0:
+        return "Error: No se puede dividir entre cero"
 
-    
-    
-    
-    
+    resultado = a / b
+    return [resultado, "division", f"{a} / {b}", a, b]
 
 
 def modulo(a, b):
@@ -101,17 +120,26 @@ def modulo(a, b):
     Calcula el módulo (residuo) de dos números.
 
     Args:
-        a (float): Dividendo
-        b (float): Divisor
+        a (float): Dividendo.
+        b (float): Divisor.
 
     Returns:
-        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
-                          el resultado en formato [resultado,operación].
+        list | str:
+            - Lista con la información de la operación si es válida:
+                [
+                    resultado (float),
+                    titulo (str),
+                    operacion (str),
+                    num1 (float),
+                    num2 (float)
+                ]
+            - Mensaje de error si el divisor es cero.
     """
     if b == 0:
         return "Error: No se puede calcular modulo con cero"
-    return [a % b, "modulo"]
-    
+
+    resultado = a % b
+    return [resultado, "modulo", f"{a} % {b}", a, b]
 
 
 def potencia(a, b):
@@ -119,14 +147,21 @@ def potencia(a, b):
     Calcula a elevado a la potencia b.
 
     Args:
-        a (float): Base
-        b (float): Exponente
+        a (float): Base.
+        b (float): Exponente.
 
     Returns:
-        list: [resultado (float), operacion (str)]. Lista con el nombre de la operación y
-                          el resultado en formato [resultado,operación].
+        list: Lista con la información de la operación en el formato:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (float)
+            ]
     """
-    return [a ** b, "potencia"]
+    resultado = a ** b
+    return [resultado, "potencia", f"{a} ** {b}", a, b]
 
 
 # ============================================
@@ -135,154 +170,157 @@ def potencia(a, b):
 
 def decimal_a_binario(numero):
     """
-    Convierte un número decimal a binario usando algoritmo manual.
-    Lógica del Algoritmo:
-    1. Se maneja el caso base: si el número es 0, el resultado es "0".
-    2. Mientras el número sea mayor a 0:
-       - Se obtiene el residuo de la división entre 2 (numero % 2).
-       - El residuo se concatena al INICIO de la cadena de texto resultante.
-       - Se actualiza el número dividiéndolo por 2 usando división entera (//).
-       Args:
-        numero (int): El número entero decimal a convertir.
+    Convierte un número decimal entero a binario usando algoritmo manual.
+
+    Args:
+        numero (int): Número entero decimal.
 
     Returns:
-        str: Representación binaria resultante.
+        list | str:
+            - Lista con el formato:
+                [
+                    resultado (str),
+                    titulo (str),
+                    operacion (str),
+                    num1 (int),
+                    num2 (None)
+                ]
+            - Mensaje de error si el valor no es entero.
     """
+    if not isinstance(numero, int):
+        return "Error: El número debe ser entero"
+
     if numero == 0:
-        return "0"
-    
+        return ["0", "decimal_a_binario", f"{numero} -> binario", numero, None]
+
+    negativo = numero < 0
+    numero = abs(numero)
+
     resultado = ""
     while numero > 0:
         residuo = numero % 2
         resultado = str(residuo) + resultado
-        numero = numero // 2
-    return resultado
-    # TODO: Implementar algoritmo de división sucesiva
-    # Algoritmo:
-    # 1. Crear string vacío para resultado
-    # 2. Mientras numero > 0:
-    #    - residuo = numero % 2
-    #    - agregar residuo al inicio del string
-    #    - numero = numero // 2
-    # 3. Retornar el string
-    # Caso especial: si numero == 0, retornar "0"
-    pass
+        numero //= 2
+
+    if negativo:
+        resultado = "-" + resultado
+
+    return [resultado, "decimal_a_binario", f"{resultado}", numero, None]
+
 
 
 def decimal_a_hexadecimal(numero):
     """
-    Convierte un número decimal a hexadecimal usando residuos y mapeo de caracteres.
-
-    Lógica del Algoritmo:
-    1. Se define una cadena de referencia "0123456789ABCDEF" donde cada índice 
-       corresponde a su valor hexadecimal.
-    2. Se divide el número sucesivamente entre 16.
-    3. El residuo de cada división se usa como índice para extraer el carácter 
-       correcto de la cadena de referencia.
-    4. El proceso termina cuando el cociente llega a 0.
+    Convierte un número decimal entero a hexadecimal.
 
     Args:
-        numero (int): Número decimal entero.
+        numero (int): Número entero decimal.
 
     Returns:
-        str: Representación hexadecimal (ej. 255 -> "FF").
+        list | str:
+            - Lista con el formato:
+                [
+                    resultado (str),
+                    titulo (str),
+                    operacion (str),
+                    num1 (int),
+                    num2 (None)
+                ]
+            - Mensaje de error si el valor no es entero.
     """
+    if not isinstance(numero, int):
+        return "Error: El número debe ser entero"
+
     if numero == 0:
-        return "0"
-    
+        return ["0", "decimal_a_hexadecimal", f"{numero} -> hexadecimal", numero, None]
+
     digitos_hex = "0123456789ABCDEF"
+    negativo = numero < 0
+    numero = abs(numero)
+
     resultado = ""
     while numero > 0:
         residuo = numero % 16
         resultado = digitos_hex[residuo] + resultado
-        numero = numero // 16
-    return resultado
-        
-    # TODO: Implementar
-    # Pueden usar el método similar a binario
-    # Recordar: 10=A, 11=B, 12=C, 13=D, 14=E, 15=F
-    pass
+        numero //= 16
+
+    if negativo:
+        resultado = "-" + resultado
+
+    return [resultado, "decimal_a_hexadecimal", f"{resultado}", numero, None]
 
 
 def binario_a_decimal(binario):
     """
-    Convierte un número binario (string) a su equivalente decimal.
-
-    Lógica del Algoritmo:
-    1. Se inicializa un acumulador 'decimal' en 0.
-    2. Se recorre el string de derecha a izquierda (potencias crecientes).
-    3. Para cada dígito en la posición 'i':
-       - Se multiplica el dígito (0 o 1) por la base 2 elevada a la potencia 'i'.
-       - Se suma el resultado al acumulador decimal.
-    
-    Fórmula: decimal = sum(digito * 2^posicion)
+    Convierte un número binario (string) a decimal.
 
     Args:
-        binario (str): Cadena de texto con ceros y unos.
+        binario (str): Cadena con ceros y unos.
 
     Returns:
-        int: El valor entero en base 10.
+        list | str:
+            - Lista con el formato:
+                [
+                    resultado (int),
+                    titulo (str),
+                    operacion (str),
+                    num1 (str),
+                    num2 (None)
+                ]
+            - Mensaje de error si contiene caracteres inválidos.
     """
+    binario = str(binario).strip()
+
+    if not all(c in "01" for c in binario):
+        return "Error: El número binario solo puede contener 0 y 1"
+
     decimal = 0
-    # Invertimos el string para que el índice coincida con la potencia
     binario_inv = binario[::-1]
-    
+
     for i in range(len(binario_inv)):
         digito = int(binario_inv[i])
         decimal += digito * (2 ** i)
-    return decimal
-    # TODO: Implementar
-    # Algoritmo:
-    # 1. Inicializar decimal = 0
-    # 2. Para cada dígito en binario (de derecha a izquierda):
-    #    - decimal += dígito * (2 ^ posición)
-    # 3. Retornar decimal
-    pass
+
+    return [decimal, "binario_a_decimal", f"{binario}", binario, None]
 
 
 def hexadecimal_a_decimal(hexadecimal):
-  """
+    """
     Convierte un número hexadecimal (string) a decimal.
 
-    Lógica del Algoritmo:
-    1. Se normaliza la entrada a mayúsculas con .upper() para evitar errores de caja.
-    2. Se define la cadena de referencia "0123456789ABCDEF".
-    3. Se invierte la cadena para que el índice del bucle coincida con la potencia de 16.
-    4. Para cada carácter, se busca su posición en la cadena de referencia:
-       - Si el carácter no es válido (ej. 'G'), se lanza una excepción clara.
-       - Se suma al total: valor * (16 ** posición).
-
     Args:
-        hexadecimal (str): Cadena hexadecimal (ej. "1A", "F3").
+        hexadecimal (str): Cadena hexadecimal.
 
     Returns:
-        int: El valor entero decimal equivalente.
-
-    Raises:
-        ValueError: Si la cadena contiene caracteres no hexadecimales.
+        list | str:
+            - Lista con el formato:
+                [
+                    resultado (int),
+                    titulo (str),
+                    operacion (str),
+                    num1 (str),
+                    num2 (None)
+                ]
+            - Mensaje de error si contiene caracteres inválidos.
     """
-    # 1. Normalización y preparación
-hexadecimal = str(hexadecimal).upper().strip()
-digitos_hex = "0123456789ABCDEF"
-decimal = 0
-    
-    # 2. Invertir para manejar potencias (16^0, 16^1, etc.)
-hex_inv = hexadecimal[::-1]
-    
-    # 3. Iteración y cálculo
-for i in range(len(hex_inv)):
+    hexadecimal = str(hexadecimal).upper().strip()
+    digitos_hex = "0123456789ABCDEF"
+
+    decimal = 0
+    hex_inv = hexadecimal[::-1]
+
+    for i in range(len(hex_inv)):
         caracter = hex_inv[i]
-        
-        # Validación: ¿El carácter existe en nuestro alfabeto hexadecimal?
+
         if caracter not in digitos_hex:
-            raise ValueError(f"Carácter inválido '{caracter}' detectado en el número hexadecimal.")
-            
+            return f"Error: Carácter inválido '{caracter}' en número hexadecimal"
+
         valor = digitos_hex.index(caracter)
         decimal += valor * (16 ** i)
-        
-return decimal
-# TODO: Implementar
-pass
+
+    return [decimal, "hexadecimal_a_decimal", f"{hexadecimal}", hexadecimal, None]
+
+
 # ============================================
 # SECCIÓN 3: CONVERSIÓN DE UNIDADES (COMPLETADO)
 # ============================================
@@ -292,12 +330,20 @@ def bytes_a_kilobytes(bytes_val):
     Convierte bytes a kilobytes.
 
     Args:
-        bytes_val (float): Cantidad en bytes
+        bytes_val (float): Cantidad en bytes.
 
     Returns:
-        float: Cantidad en kilobytes
+        list:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (None)
+            ]
     """
-    return bytes_val / 1024
+    resultado = bytes_val / 1024
+    return [resultado, "bytes_a_kilobytes", f"{bytes_val} / 1024", bytes_val, None]
 
 
 def kilobytes_a_megabytes(kilobytes):
@@ -305,13 +351,20 @@ def kilobytes_a_megabytes(kilobytes):
     Convierte kilobytes a megabytes.
 
     Args:
-        kb (float): Cantidad en kilobytes
+        kilobytes (float): Cantidad en kilobytes.
 
     Returns:
-        float: Cantidad en megabytes
+        list:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (None)
+            ]
     """
-    # TODO: Implementar (1 MB = 1024 KB)
-    return kb / 1024
+    resultado = kilobytes / 1024
+    return [resultado, "kilobytes_a_megabytes", f"{kilobytes} / 1024", kilobytes, None]
 
 
 def megabytes_a_gigabytes(megabytes):
@@ -319,53 +372,81 @@ def megabytes_a_gigabytes(megabytes):
     Convierte megabytes a gigabytes.
 
     Args:
-        mb (float): Cantidad en megabytes
+        megabytes (float): Cantidad en megabytes.
 
     Returns:
-        float: Cantidad en gigabytes
+        list:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (None)
+            ]
     """
-    # TODO: Implementar
-    return mb / 1024
+    resultado = megabytes / 1024
+    return [resultado, "megabytes_a_gigabytes", f"{megabytes} / 1024", megabytes, None]
 
 def gigabytes_a_megabytes(gigabytes):
     """
     Convierte gigabytes a megabytes.
 
     Args:
-        gb (float): Cantidad en gigabytes
+        gigabytes (float): Cantidad en gigabytes.
 
     Returns:
-        float: Cantidad en megabytes
+        list:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (None)
+            ]
     """
-    return gb * 1024
+    resultado = gigabytes * 1024
+    return [resultado, "gigabytes_a_megabytes", f"{gigabytes} * 1024", gigabytes, None]
 
 def megabytes_a_kilobytes(megabytes):
     """
     Convierte megabytes a kilobytes.
 
     Args:
-        mb (float): Cantidad en megabytes
+        megabytes (float): Cantidad en megabytes.
 
     Returns:
-        float: Cantidad en kilobytes
+        list:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (None)
+            ]
     """
-    return mb * 1024
+    resultado = megabytes * 1024
+    return [resultado, "megabytes_a_kilobytes", f"{megabytes} * 1024", megabytes, None]
 
 def kilobytes_a_bytes(kilobytes):
     """
     Convierte kilobytes a bytes.
 
     Args:
-        kb (float): Cantidad en kilobytes
+        kilobytes (float): Cantidad en kilobytes.
 
     Returns:
-        float: Cantidad en bytes
+        list:
+            [
+                resultado (float),
+                titulo (str),
+                operacion (str),
+                num1 (float),
+                num2 (None)
+            ]
     """
-    return kb * 1024
+    resultado = kilobytes * 1024
+    return [resultado, "kilobytes_a_bytes", f"{kilobytes} * 1024", kilobytes, None]
 
-
-# TODO: Implementar las funciones inversas
-# gigabytes_a_megabytes(), megabytes_a_kilobytes(), kilobytes_a_bytes()
 
 # ============================================
 # SECCIÓN 4: CALCULADORA CIENTIFICA
@@ -475,26 +556,53 @@ def calculadora_cientifica():
 
     El usuario puede salir escribiendo 'N'.
 
-    La calculadora utiliza aproximaciones mediante
-    series de Taylor para los cálculos trigonométricos.
+    Los cálculos trigonométricos utilizan aproximaciones mediante
+    series de Taylor.
+
+    Returns:
+        list | None:
+            - Lista con la última operación realizada en el formato:
+                [
+                    resultado (float | str),
+                    titulo (str),
+                    operacion_str (str),
+                    num1 (float),
+                    num2 (None)
+                ]
+            - None si el usuario no realizó ninguna operación antes de salir.
     """
+    ultima_operacion = None
     booleano = True
+
     while booleano:
-        usuario = str(input("¿Que es lo que quiere calcular(seno/coseno/tangente/N para salir)?: ").lower())
+        usuario = str(input("¿Qué quiere calcular (seno/coseno/tangente/N para salir)?: ").lower())
+
         if usuario == "seno":
             grados_usuario = float(input("Ingrese los grados a evaluar: "))
-            print(f"Resultado: {calcular_seno_aproximado(grad=grados_usuario)}")
+            resultado = calcular_seno_aproximado(grad=grados_usuario)
+            print(f"Resultado: {resultado}")
+            ultima_operacion = [resultado, "seno", f"sen({grados_usuario}°)", grados_usuario, None]
+
         elif usuario == "coseno":
             grados_usuario = float(input("Ingrese los grados a evaluar: "))
-            print(f"Resultado: {calcular_coseno_aproximado(grad=grados_usuario)}")
+            resultado = calcular_coseno_aproximado(grad=grados_usuario)
+            print(f"Resultado: {resultado}")
+            ultima_operacion = [resultado, "coseno", f"cos({grados_usuario}°)", grados_usuario, None]
+
         elif usuario == "tangente":
             grados_usuario = float(input("Ingrese los grados a evaluar: "))
-            print(f"Resultado: {calcular_tangente_aproximada(grad=grados_usuario)}")
+            resultado = calcular_tangente_aproximada(grad=grados_usuario)
+            print(f"Resultado: {resultado}")
+            ultima_operacion = [resultado, "tangente", f"tan({grados_usuario}°)", grados_usuario, None]
+
         elif usuario == "n":
             print("Saliendo...")
             booleano = False
+
         else:
-            print("Error.Input invalido")
+            print("Error. Input inválido")
+
+    return ultima_operacion
 
 # ============================================
 # SECCIÓN 5: GESTIÓN DE HISTORIAL (Estudiante 3)
@@ -535,11 +643,6 @@ def mostrar_historial():
     else:          
         print("Datos no disponibles")
 
-    # TODO: Implementar
-    # 1. Verificar .gitkeep historial está vacío
-    # 2. Si está vacío, mostrar mensaje
-    # 3. Si no, iterar sobre historial y mostrar cada operación numerada
-
 
 def limpiar_historial():
     """
@@ -559,9 +662,81 @@ def limpiar_historial():
     open(ruta_historial, "w", encoding="utf-8").close()
     open(ruta_csv, "w", encoding="utf-8").close()
 
-
 # ============================================
-# SECCIÓN 6: GESTIÓN DE ARCHIVOS (COMPLETADO)
+# SECCIÓN 6: CONVERSOR DE TEMPERATURA (COMPLETADO)
+# ============================================
+def convertir_temperatura():
+    """
+    Ejecuta un menú interactivo de conversión de temperaturas.
+
+    Permite convertir:
+        1. Celsius a Fahrenheit y Kelvin
+        2. Fahrenheit a Celsius y Kelvin
+        3. Kelvin a Celsius y Fahrenheit
+
+    El usuario puede salir escribiendo '4'.
+
+    Returns:
+        list | None:
+            - Lista con la última conversión realizada en el formato:
+                [
+                    resultado (str),
+                    titulo (str),
+                    operacion_str (str),
+                    num1 (float),
+                    num2 (None)
+                ]
+            - None si el usuario sale sin realizar ninguna conversión.
+    """
+    print("--- Conversor de Temperatura ---")
+    print("1. Celsius a Fahrenheit/Kelvin")
+    print("2. Fahrenheit a Celsius/Kelvin")
+    print("3. Kelvin a Celsius/Fahrenheit")
+    print("4. Salir")
+
+    ultima_conversion = None
+
+    while True:
+        opcion = input("\nSelecciona una opción (1-4): ")
+
+        if opcion == '4':
+            print("¡Hasta luego!")
+            break
+
+        if opcion in ['1', '2', '3']:
+            try:
+                temp = float(input("Ingresa el valor de la temperatura: "))
+            except ValueError:
+                print("Error: Ingresa un número.")
+                continue
+
+            if opcion == '1':  # C -> F, K
+                f = (temp * 9/5) + 32
+                k = temp + 273.15
+                resultado_str = f"{temp}°C = {f:.2f}°F, {k:.2f}K"
+                print(f"Resultado: {resultado_str}")
+                ultima_conversion = [resultado_str, "Celsius_a_F_K", f"C({temp}°) -> F/K", temp, None]
+
+            elif opcion == '2':  # F -> C, K
+                c = (temp - 32) * 5/9
+                k = c + 273.15
+                resultado_str = f"{temp}°F = {c:.2f}°C, {k:.2f}K"
+                print(f"Resultado: {resultado_str}")
+                ultima_conversion = [resultado_str, "Fahrenheit_a_C_K", f"F({temp}°) -> C/K", temp, None]
+
+            elif opcion == '3':  # K -> C, F
+                c = temp - 273.15
+                f = (c * 9/5) + 32
+                resultado_str = f"{temp}K = {c:.2f}°C, {f:.2f}°F"
+                print(f"Resultado: {resultado_str}")
+                ultima_conversion = [resultado_str, "Kelvin_a_C_F", f"K({temp}) -> C/F", temp, None]
+
+        else:
+            print("Opción no válida. Intenta de nuevo.")
+
+    return ultima_conversion
+# ============================================
+# SECCIÓN 7: GESTIÓN DE ARCHIVOS (COMPLETADO)
 # ============================================
 
 def actualizar_historial(operacion):
@@ -738,277 +913,193 @@ def cargar_historial_archivo():
     ruta_csv = os.path.join(ruta_base, "datos", "datos.csv")
     if not os.path.exists(ruta_csv):
         return
-    with open(ruta_csv,mode="r",encoding="utf-8") as f:
-        lector = csv.DictReader(f)
-        for fila in lector:
-            historial.append(fila)
+    try:
+        with open(ruta_csv, mode="r", encoding="utf-8") as f:
+            lector = csv.DictReader(f)
+            historial.clear()
+            for fila in lector:
+                historial.append(fila)
+
+    except Exception as e:
+        print(f"Error al cargar el historial: {e}")
 
 
 # ============================================
-# SECCIÓN 7: VALIDACIÓN (Estudiante 1)
+# SECCIÓN 8: VALIDACIÓN (Estudiante 1)
 # ============================================
 
 def validar_numero(mensaje):
     """
-    Solicita y valida un número al usuario.
-
-    Args:
-        mensaje (str): Mensaje a mostrar
-
-    Returns:
-        float: Número validado
+    Solicita y valida un número flotante al usuario.
     """
     while True:
         try:
-            numero = float(input(mensaje))
-            return numero
+            return float(input(mensaje))
         except ValueError:
-            print("❌ Error: Ingrese un número válido.")
+            print("❌ Error: Ingrese un número válido (ej: 10 o 10.5).")
 
 
 def validar_numero_entero(mensaje):
     """
     Solicita y valida un número entero al usuario.
-
-    Args:
-        mensaje (str): Mensaje a mostrar
-
-    Returns:
-        int: Número entero validado
     """
-    # TODO: Implementar similar a validar_numero
-    # pero convirtiendo a int en lugar de float
-    pass
-
+    while True:
+        try:
+            return int(input(mensaje))
+        except ValueError:
+            print("❌ Error: Debe ingresar un número entero.")
 
 # ============================================
-# SECCIÓN 8: MENÚS (Estudiante 1)
+# SECCIÓN 9: MENÚS (Estudiante 1)
 # ============================================
 
 def mostrar_menu_principal():
-    """
-    Muestra en pantalla el menú principal del programa.
-
-    Función:
-    - Presenta al usuario las opciones disponibles de la calculadora.
-    - No solicita datos ni toma decisiones.
-    - Su única responsabilidad es mostrar información.
-
-    No recibe parámetros.
-    No retorna ningún valor.
-    """
-    print("\n" + "=" * 60)
-    print("   CALCULADORA MULTIFUNCIONAL v2.0")
-    print("=" * 60)
-    print("\nMENÚ PRINCIPAL:")
-    print("1. Calculadora Básica")
-    print("2. Conversor de Unidades de Datos")
-    print("3. Calculadora de Sistemas Numéricos")
-    print("4. Ver Historial")
-    print("5. Limpiar Historial")
-    print("6. Salir")
+    print("\n" + "═" * 60)
+    print("   CALCULADORA MULTIFUNCIONAL v2.0".center(60))
+    print("═" * 60)
+    print("1. Calculadora Básica (Aritmética)")
+    print("2. Calculadora Científica (Trigonometría)")
+    print("3. Conversor de Unidades de Datos (Bytes/GB)")
+    print("4. Calculadora de Sistemas Numéricos (Bin/Hex)")
+    print("5. Conversor de Temperatura (C/F/K)")
+    print("6. Ver Historial")
+    print("7. Limpiar Historial")
+    print("8. Salir")
     print("-" * 60)
 
 
 def menu_calculadora_basica():
-    """
-    Controla el menú de la calculadora básica.
-
-    Función:
-    - Muestra las operaciones matemáticas disponibles.
-    - Permite al usuario seleccionar una operación.
-    - Mantiene el menú activo mediante un bucle while True.
-    - Sale del menú cuando el usuario selecciona la opción 7.
-
-    No recibe parámetros.
-    No retorna ningún valor.
-    """
     while True:
-        print("\n--- CALCULADORA BÁSICA ---")
-        print("1. Suma")
-        print("2. Resta")
-        print("3. Multiplicación")
-        print("4. División")
-        print("5. Módulo (residuo)")
-        print("6. Potencia")
-        print("7. Volver al menú principal")
+        print("\n--- 🧮 CALCULADORA BÁSICA ---")
+        print("1. Sumar | 2. Restar | 3. Multiplicar | 4. Dividir")
+        print("5. Módulo | 6. Potencia | 7. Volver")
 
-        opcion = input("\nSeleccione operación: ")
+        opc = input("\nSeleccione operación: ")
+        if opc == "7": break
 
-        if opcion == "7":
-            break
+        if opc in ["1", "2", "3", "4", "5", "6"]:
+            n1 = validar_numero("Primer número: ")
+            n2 = validar_numero("Segundo número: ")
 
-        print("⚠️ Operación aún no implementada")
+            if opc == "1":
+                res = sumar(n1, n2)
+            elif opc == "2":
+                res = restar(n1, n2)
+            elif opc == "3":
+                res = multiplicar(n1, n2)
+            elif opc == "4":
+                res = dividir(n1, n2)
+            elif opc == "5":
+                res = modulo(n1, n2)
+            elif opc == "6":
+                res = potencia(n1, n2)
+
+            if isinstance(res, str):  # Manejo de errores (división por cero)
+                print(f"❌ {res}")
+            else:
+                print(f"✅ Resultado: {res[0]}")
+                actualizar_historial(res)
+        else:
+            print("❌ Opción no válida.")
 
 
 def menu_conversor_unidades():
-    """
-    Controla el menú del conversor de unidades de datos.
-
-    Función:
-    - Muestra las opciones de conversión disponibles.
-    - Permite al usuario elegir una conversión.
-    - Usa un bucle while True para repetir el menú.
-    - Regresa al menú principal cuando el usuario elige la opción 3.
-
-    No recibe parámetros.
-    No retorna ningún valor.
-    """
     while True:
-        print("\n--- CONVERSOR DE UNIDADES ---")
-        print("1. Convertir KB a MB")
-        print("2. Convertir MB a GB")
-        print("3. Volver al menú principal")
+        print("\n--- 💾 CONVERSOR DE UNIDADES ---")
+        print("1. B a KB   | 2. KB a MB  | 3. MB a GB")
+        print("4. GB a MB  | 5. MB a KB  | 6. KB a B   | 7. Volver")
 
-        opcion = input("\nSeleccione opción: ")
+        opc = input("\nSeleccione opción: ")
+        if opc == "7": break
 
-        if opcion == "3":
-            break
+        if opc in ["1", "2", "3", "4", "5", "6"]:
+            val = validar_numero("Cantidad a convertir: ")
+            if opc == "1":
+                res = bytes_a_kilobytes(val)
+            elif opc == "2":
+                res = kilobytes_a_megabytes(val)
+            elif opc == "3":
+                res = megabytes_a_gigabytes(val)
+            elif opc == "4":
+                res = gigabytes_a_megabytes(val)
+            elif opc == "5":
+                res = megabytes_a_kilobytes(val)
+            elif opc == "6":
+                res = kilobytes_a_bytes(val)
 
-        print("⚠️ Conversión aún no implementada")
+            print(f"✅ Resultado: {res[0]}")
+            actualizar_historial(res)
 
 
 def menu_sistemas_numericos():
-    """
-    Controla el menú de conversión de sistemas numéricos.
-
-    Función:
-    - Permite seleccionar conversiones entre sistemas numéricos.
-    - Mantiene el menú activo usando un bucle while True.
-    - Sale del menú cuando el usuario selecciona la opción 3.
-
-    No recibe parámetros.
-    No retorna ningún valor.
-    """
     while True:
-        print("\n--- SISTEMAS NUMÉRICOS ---")
-        print("1. Decimal a Binario")
-        print("2. Binario a Decimal")
-        print("3. Volver al menú principal")
+        print("\n--- 🔢 SISTEMAS NUMÉRICOS ---")
+        print("1. Decimal a Binario    | 2. Decimal a Hexadecimal")
+        print("3. Binario a Decimal    | 4. Hexadecimal a Decimal")
+        print("5. Volver")
 
-        opcion = input("\nSeleccione opción: ")
+        opc = input("\nSeleccione opción: ")
+        if opc == "5": break
 
-        if opcion == "3":
-            break
-
-        print("⚠️ Conversión aún no implementada")
-
-
-def main():
-    """
-    Función principal del programa.
-
-    Función:
-    - Controla el flujo general de la aplicación.
-    - Muestra el menú principal de forma repetida.
-    - Permite al usuario navegar entre los distintos submenús.
-    - Finaliza el programa cuando el usuario selecciona la opción "Salir".
-
-    Estructura clave:
-    - Usa un bucle while True para mantener el programa en ejecución.
-    - Utiliza input() para capturar la opción del usuario.
-    - Emplea break para terminar el programa de forma controlada.
-
-    No recibe parámetros.
-    No retorna ningún valor.
-    """
-    while True:
-        mostrar_menu_principal()
-        opcion = input("Seleccione una opción: ")
-
-        if opcion == "1":
-            menu_calculadora_basica()
-        elif opcion == "2":
-            menu_conversor_unidades()
-        elif opcion == "3":
-            menu_sistemas_numericos()
-        elif opcion == "4":
-            print("⚠️ Historial aún no implementado")
-        elif opcion == "5":
-            print("⚠️ Limpieza de historial aún no implementada")
-        elif opcion == "6":
-            print("\nGracias por usar la calculadora 👋")
-            break
+        if opc in ["1", "2"]:
+            n = validar_numero_entero("Ingrese número decimal: ")
+            res = decimal_a_binario(n) if opc == "1" else decimal_a_hexadecimal(n)
+        elif opc == "3":
+            n = input("Ingrese número binario: ")
+            res = binario_a_decimal(n)
+        elif opc == "4":
+            n = input("Ingrese número hexadecimal: ")
+            res = hexadecimal_a_decimal(n)
         else:
-            print("❌ Opción no válida, intente de nuevo")
+            continue
 
+        if isinstance(res, str):
+            print(f"❌ {res}")
+        else:
+            print(f"✅ Resultado: {res[0]}")
+            actualizar_historial(res)
 
-def iniciar_programa():
-    """
-    Punto de entrada del programa.
-
-    Función:
-    - Inicia la ejecución de la aplicación.
-    - Llama a la función main(), que controla todo el flujo.
-
-    Esta función existe para dejar explícito
-    dónde comienza la ejecución del programa.
-
-    No recibe parámetros.
-    No retorna ningún valor.
-    """
-    main()
-
-
-iniciar_programa()
 
 # ============================================
-# PROGRAMA PRINCIPAL
+# PROGRAMA PRINCIPAL (MAIN)
 # ============================================
 
 def main():
-    """Función principal del programa"""
-
-    print("╔" + "═"*58 + "╗")
-    print("║" + " "*58 + "║")
-    print("║" + "  CALCULADORA MULTIFUNCIONAL - Versión Avanzada".center(58) + "║")
-    print("║" + " "*58 + "║")
-    print("║" + "  Con historial, funciones y persistencia de datos".center(58) + "║")
-    print("║" + " "*58 + "║")
-    print("╚" + "═"*58 + "╝")
-
-    # Cargar historial al iniciar
+    # Inicialización
     cargar_historial_archivo()
-    print("\n✅ Historial cargado desde archivo.")
 
-    continuar = True
-
-    while continuar:
+    while True:
         mostrar_menu_principal()
-
-        opcion = input("\nSeleccione una opción (1-6): ")
+        opcion = input("\nSeleccione una opción (1-8): ")
 
         if opcion == "1":
             menu_calculadora_basica()
-
         elif opcion == "2":
-            menu_conversor_unidades()
-
+            # Redirige al menú interno de la sección científica
+            res = calculadora_cientifica()
+            if res: actualizar_historial(res)
         elif opcion == "3":
-            menu_sistemas_numericos()
-
+            menu_conversor_unidades()
         elif opcion == "4":
-            mostrar_historial()
-
+            menu_sistemas_numericos()
         elif opcion == "5":
-            confirmacion = input("\n¿Está seguro de limpiar el historial? (s/n): ")
-            if confirmacion.lower() == "s":
-                limpiar_historial()
-                print("✅ Historial limpiado.")
-
+            # Redirige al menú interno de temperatura
+            res = convertir_temperatura()
+            if res: actualizar_historial(res)
         elif opcion == "6":
-            print("\n💾 Guardando historial...")
+            mostrar_historial()
+        elif opcion == "7":
+            confirmar = input("¿Seguro que desea borrar todo? (s/n): ")
+            if confirmar.lower() == 's':
+                limpiar_historial()
+                print("✅ Historial borrado.")
+        elif opcion == "8":
+            print("\n💾 Guardando datos...")
             guardar_historial_archivo()
-            print("✅ Historial guardado en datos/historial.txt")
-            print("\n¡Gracias por usar la Calculadora Multifuncional!")
-            print("¡Hasta pronto! 👋")
-            continuar = False
-
+            print("👋 ¡Gracias por usar la calculadora! Saliendo...")
+            break
         else:
-            print("\n❌ Opción inválida. Por favor seleccione 1-6.")
-
-    print("\nPrograma terminado.")
-
+            print("❌ Opción inválida.")
 
 # Punto de entrada del programa
 if __name__ == "__main__":
