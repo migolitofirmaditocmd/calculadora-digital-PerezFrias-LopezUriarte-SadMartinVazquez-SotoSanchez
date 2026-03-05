@@ -540,6 +540,9 @@ def calcular_tangente_aproximada(grad):
         float | str: Valor aproximado de la tangente.
                      Retorna "Indefinida" si el coseno es cercano a 0.
     """
+    if grad % 180 == 90:
+        return "Indefinida"
+
     coseno = calcular_coseno_aproximado(grad)
     if abs(coseno) < 1e-10:
         return "Indefinida"
