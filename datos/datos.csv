@@ -1,0 +1,3 @@
+fecha,titulo,operacion,num1,num2,resultado
+2026-03-18 09:26:53,suma,2.0 + 2.0,2.0,2.0,4.0
+2026-03-18 09:27:00,resta,2.0 - 2.0,2.0,2.0,0.0

@@ -585,18 +585,21 @@ def calculadora_cientifica():
             resultado = calcular_seno_aproximado(grad=grados_usuario)
             print(f"Resultado: {resultado}")
             ultima_operacion = [resultado, "seno", f"sen({grados_usuario}°)", grados_usuario, None]
+            actualizar_historial(ultima_operacion)
 
         elif usuario == "coseno":
             grados_usuario = float(input("Ingrese los grados a evaluar: "))
             resultado = calcular_coseno_aproximado(grad=grados_usuario)
             print(f"Resultado: {resultado}")
             ultima_operacion = [resultado, "coseno", f"cos({grados_usuario}°)", grados_usuario, None]
+            actualizar_historial(ultima_operacion)
 
         elif usuario == "tangente":
             grados_usuario = float(input("Ingrese los grados a evaluar: "))
             resultado = calcular_tangente_aproximada(grad=grados_usuario)
             print(f"Resultado: {resultado}")
             ultima_operacion = [resultado, "tangente", f"tan({grados_usuario}°)", grados_usuario, None]
+            actualizar_historial(ultima_operacion)
 
         elif usuario == "n":
             print("Saliendo...")
@@ -605,7 +608,7 @@ def calculadora_cientifica():
         else:
             print("Error. Input inválido")
 
-    return ultima_operacion
+    return
 
 # ============================================
 # SECCIÓN 5: GESTIÓN DE HISTORIAL (Estudiante 3)
